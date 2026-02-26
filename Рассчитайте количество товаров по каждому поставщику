@@ -1,0 +1,13 @@
+Практическое занятие: рассчитайте количество товаров по каждому поставщику
+
+select s.company_name, c.category_name, count(p.product_id) as cnt
+from 
+	categories c 
+cross join 
+	suppliers s
+left join
+	products p 
+on 
+	p.category_id = c.category_id and p.supplier_id = s.supplier_id
+group by c.category_name, s.company_name
+order by s.company_name, cnt
