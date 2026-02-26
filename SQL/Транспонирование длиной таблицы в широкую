@@ -18,3 +18,27 @@ INSERT INTO person_long_table (last_name, attribute_key, attribute_value) VALUES
     ('Сидоров', 'FIO', 'Сидоров Сидор Сидорович'),
     ('Сидоров', 'Phone', '+7-999-345-67-89'),
     ('Сидоров', 'Email', 'sidorov@example.com')
+
+Код для преобразования длинной таблицы в широкую:
+-- Выборка ФИО, телефона и электронной почты сотрудников из таблицы person_long_table
+SELECT
+    -- Имя сотрудника
+    last_name,
+
+    -- Агрегатная функция нужна для работы кода с группировкой (можно использовать MIN)
+    -- Максимальное значение атрибута "ФИО"
+    MAX(CASE WHEN attribute_key = 'FIO' THEN attribute_value END) AS FIO,
+    
+    -- Максимальное значение атрибута "Телефон"
+    MAX(CASE WHEN attribute_key = 'Phone' THEN attribute_value END) AS Phone,
+    
+    -- Максимальное значение атрибута "Электронная почта"
+    MAX(CASE WHEN attribute_key = 'Email' THEN attribute_value END) AS Email
+
+FROM person_long_table
+
+-- Группировка по фамилии сотрудника
+GROUP BY last_name
+
+-- Сортировка результатов по фамилии сотрудника
+ORDER BY last_name;
