@@ -1,1 +1,20 @@
 Транспонируйте таблицу с помощью группировки.
+
+Создание длинной таблицы:
+Create table person_long_table (
+    last_name VARCHAR(50) NOT NULL,
+    attribute_key VARCHAR(20) NOT NULL CHECK (attribute_key IN ('FIO', 'Phone', 'Email')),
+    attribute_value VARCHAR(100) NOT NULL,
+    PRIMARY KEY (last_name, attribute_key)
+);
+
+INSERT INTO person_long_table (last_name, attribute_key, attribute_value) VALUES
+    ('Иванов', 'FIO', 'Иванов Иван Иванович'),
+    ('Иванов', 'Phone', '+7-999-123-45-67'),
+    ('Иванов', 'Email', 'ivanov@example.com'),
+    ('Петров', 'FIO', 'Петров Петр Петрович'),
+    ('Петров', 'Phone', '+7-999-234-56-78'),
+    ('Петров', 'Email', 'petrov@example.com'),
+    ('Сидоров', 'FIO', 'Сидоров Сидор Сидорович'),
+    ('Сидоров', 'Phone', '+7-999-345-67-89'),
+    ('Сидоров', 'Email', 'sidorov@example.com')
